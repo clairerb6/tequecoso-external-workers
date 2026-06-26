@@ -1,0 +1,7 @@
+flowable:
+  base-url: http://localhost:8080
+  username: admin
+  password: test
+
+servicios:
+  endpoint-url: https://tomcat.katherineflores.me/webservice-tequecoso/api/v1/
