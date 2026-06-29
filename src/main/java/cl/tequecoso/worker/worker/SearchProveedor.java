@@ -35,7 +35,7 @@ public class SearchProveedor implements ExternalWorkerHandler {
 
             if (rutVariable == null) {
                 return resultBuilder.failure()
-                        .message("La variable 'rut' es obligatoria")
+                        .message("Rut es obligatoria")
                         .details("El job no contiene la variable 'rut'");
             }
 

@@ -20,8 +20,7 @@ public class Proveedor {
     public Proveedor() {
     }
 
-    public Proveedor(Long id,
-                     String proveedor,
+    public Proveedor(Long id, String proveedor,
                      int rut,
                      char dv,
                      String contact,
