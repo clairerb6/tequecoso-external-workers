@@ -9,7 +9,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableFlowableWorker
 public class ExternalWorkerApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(ExternalWorkerApplication.class, args);
+        SpringApplication.run(
+                ExternalWorkerApplication.class,
+                args
+        );
     }
+
 }
