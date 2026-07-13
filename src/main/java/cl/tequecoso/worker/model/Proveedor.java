@@ -14,26 +14,26 @@ public class Proveedor {
     private String city;
     private String region;
     private String category;
-    private boolean active = true;
     private String notes;
 
     public Proveedor() {
     }
 
-    public Proveedor(Long id, String proveedor,
-                     int rut,
-                     char dv,
-                     String contact,
-                     String contactName,
-                     String email,
-                     String phone,
-                     String address,
-                     String city,
-                     String region,
-                     String category,
-                     boolean active,
-                     String notes) {
-
+    public Proveedor(
+            Long id,
+            String proveedor,
+            int rut,
+            char dv,
+            String contact,
+            String contactName,
+            String email,
+            String phone,
+            String address,
+            String city,
+            String region,
+            String category,
+            String notes
+    ) {
         this.id = id;
         this.proveedor = proveedor;
         this.rut = rut;
@@ -46,9 +46,7 @@ public class Proveedor {
         this.city = city;
         this.region = region;
         this.category = category;
-        this.active = active;
         this.notes = notes;
-
     }
 
     public Long getId() {
@@ -147,14 +145,6 @@ public class Proveedor {
         this.category = category;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
     public String getNotes() {
         return notes;
     }
@@ -162,5 +152,4 @@ public class Proveedor {
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
 }

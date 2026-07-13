@@ -19,7 +19,7 @@ public class SearchProveedor implements ExternalWorkerHandler {
     @Value("${servicios.endpoint-url}")
     private String endpoint;
 
-    private final String path = "/proveedor/rut/";
+    private static final String PATH = "/proveedores/rut/";
 
     @FlowableWorker(topic = "search_proveedor")
     @Override
@@ -28,14 +28,13 @@ public class SearchProveedor implements ExternalWorkerHandler {
             WorkerResultBuilder resultBuilder) {
 
         try {
-
             Map<String, Object> variables = job.getVariables();
 
             Object rutVariable = variables.get("rut");
 
             if (rutVariable == null) {
                 return resultBuilder.failure()
-                        .message("Rut es obligatoria")
+                        .message("El RUT es obligatorio")
                         .details("El job no contiene la variable 'rut'");
             }
 
@@ -45,34 +44,27 @@ public class SearchProveedor implements ExternalWorkerHandler {
             if (proveedor == null) {
                 return resultBuilder.success()
                         .variable("exists", false)
-                        .variable("proveedor", (Long) null);
+                        .variable("proveedorId", (Long) null);
             }
 
             return resultBuilder.success()
                     .variable("exists", true)
-                    .variable("proveedor",
-                            proveedor.getId());
+                    .variable("proveedorId", proveedor.getId());
 
-        }
-
-        catch (WebClientResponseException.NotFound e) {
+        } catch (WebClientResponseException.NotFound e) {
 
             return resultBuilder.success()
                     .variable("exists", false)
-                    .variable("proveedor", (Long) null);
+                    .variable("proveedorId", (Long) null);
 
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
 
             e.printStackTrace();
 
             return resultBuilder.failure()
                     .message("Error al buscar proveedor")
                     .details(e.toString());
-
         }
-
     }
 
     @Override
@@ -87,11 +79,10 @@ public class SearchProveedor implements ExternalWorkerHandler {
                 .build();
 
         return client.get()
-                .uri(path + rut)
+                .uri(PATH + rut)
                 .retrieve()
                 .bodyToMono(Proveedor.class)
                 .block();
-
     }
 
     private int parseRut(Object obj) {
@@ -101,13 +92,12 @@ public class SearchProveedor implements ExternalWorkerHandler {
         }
 
         if (obj instanceof String value) {
-            return Integer.parseInt(value);
+            return Integer.parseInt(value.trim());
         }
 
         throw new IllegalArgumentException(
                 "Tipo de variable 'rut' no soportado: "
-                        + obj.getClass().getName());
-
+                        + obj.getClass().getName()
+        );
     }
-
 }

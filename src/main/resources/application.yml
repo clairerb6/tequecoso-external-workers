@@ -3,9 +3,12 @@ spring:
     web-application-type: none
 
 flowable:
-  base-url: http://localhost:8080
-  username: admin
-  password: test
+  external:
+    worker:
+      rest:
+        authentication:
+          bearer:
+            token: ${FLOWABLE_TOKEN}
 
 servicios:
-  endpoint-url: https://tomcat.katherineflores.me/webservice-tequecoso/api/v1/
+  endpoint-url: http://localhost:8080/api/v1
